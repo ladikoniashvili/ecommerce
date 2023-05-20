@@ -23,6 +23,40 @@ header {
     display: grid;
     grid-template-columns: 0.1fr 0.1fr 1fr 0.1fr;
 }
+header h1 {
+   font-size: 18px;
+   
+   
+} 
+.category-product-title {
+    width: 220px;
+    height: 10px;
+    margin-left: 10px;
+}
+.category-product-info-dimensions, .category-product-info-features h3, h3{
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+.category-product-finance{
+    padding: 10px;
+}
+.category-product-finance-price , .category-product-info-stock{
+    margin: 15px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.category-product-info-stock label {
+    border: 1px solid #825d5d;
+    margin: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+button{
+    margin: 10px;
+    width: 120px;
+    height: 30px;
+}
 
 header a {
     color: white;
@@ -31,13 +65,20 @@ header a {
 #search {
     display: flex;
 }
-
+.category-product-image-container img{
+    margin-right: 40px;
+    width: 400px;
+    margin-top: 20px;
+}
 #search input {
     margin-left: 10px;
     height: 30px;
     margin-top: 5px;
 }
-
+article {
+    display: flex;
+    
+}
 #headerHomeIcon {
     justify-self: start;
 }
@@ -54,6 +95,7 @@ header a {
 section {
     display: -webkit-flex;
     display: flex;
+    
 }
 
 /* Style the navigation menu */
@@ -81,10 +123,12 @@ nav ul li:hover {
 }
 
 main {
-    flex: 0.9;
-    padding-top: 20px;
-    min-height: 1600px;
+   display: flex;
+   padding-top: 20px;
+   flex-direction: column;
+   
 }
+
 
 /* Style the footer */
 footer {

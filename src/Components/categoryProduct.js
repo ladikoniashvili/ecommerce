@@ -1,8 +1,8 @@
 import React from 'react'
 
-const CategoryProduct = ({title,image,specs,features,price,stock}) => {
+  const CategoryProduct = ({title,image,specs,features,price,stock}) => {
   return (
-    <main>
+    <article>
         <div className='category-product-title'>
             {title}
         </div>
@@ -13,7 +13,7 @@ const CategoryProduct = ({title,image,specs,features,price,stock}) => {
         </figure>
 
         <aside>
-            <div className='category-product-info-dimension'>
+            <div className='category-product-info-dimensions'>
                 <h3>Dimensions</h3>
                 <label>{specs.dimensions}</label>
             </div>
@@ -25,26 +25,26 @@ const CategoryProduct = ({title,image,specs,features,price,stock}) => {
             <div className='category-product-info-features'>
                 <h3>Features</h3>
                 <ul>
-                    {features?.map((f) => {
-                        return <li>{f}</li>
+                    {features?.map((f,i) => {
+                        return <li key={`feature${i}`}>{f}</li>
                     })}
                 </ul>
             </div>
         </aside>
         <aside className='category-product-finance'>
-            <div className='category-product-price'>
+            <div className='category-product-finance-price'>
                &pound; {price}
             </div>
-            <div className='category-product-stock'>
-              <label>Stock Level :  {stock}</label>
-              <label>Free Delivery</label>
+            <div className='category-product-info-stock'>
+              <label>Stock Level:{stock}</label>
+              <label>Free Delivery:</label>
             </div>
             <div className='category-product-action'>
               <button>View Product</button>
               <button>Add to Basket</button>
             </div>
         </aside>
-    </main>
+    </article>
     
   )
 }

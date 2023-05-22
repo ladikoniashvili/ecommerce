@@ -1,14 +1,23 @@
 
 import './App.css';
 import { useEffect, useState } from 'react';
+import { getCategories, } from './fetcher';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import ProductDetail from './Components/productDetails';
+import Basket from './Components/basket';
+import Checkout from './Components/checkout'; 
+import Layout from './Components/layout';
 import Category from './Components/Category';
-import { getCategories,getProducts } from './fetcher';
-import CategoryProduct from './Components/categoryProduct';
 
 
 function App() {
   const [categories,setCategories] = useState({errorMessage : '' , data : []});
   const[products,setProducts] = useState({errorMessage : '' , data : []});
+
   useEffect(() => { 
    const fetchData = async () =>{
     const responseObject = await getCategories();
@@ -16,55 +25,24 @@ function App() {
    }
    fetchData();
 }, [])
-const handleCategoryClick = id => {
-  const fetchData = async () =>{
-    const responseObject = await getProducts(id);
-    setProducts(responseObject)
-   }
-   fetchData();
-}
 
- const renderCategories = () => {
-  return categories.data.map(c =>
-    <Category key = {c.id}  id = {c.id} title = {c.title} onCategoryClick = { () => handleCategoryClick(c.id)}/>
-  );
- }
- const renderProducts = () => {
-    return products.data.map(p =>
-     <CategoryProduct key={p.id}{...p}>{p.title}</CategoryProduct>
-    )
- }
  return (
   <>
-  <header>
-    <h1>My Store</h1>
-  </header>
-
-  <section>
-    <nav>
-      {categories.errorMessage && <div>Error : {categories.errorMessage}</div>}
-      {
-        categories.data && renderCategories() 
-      }
-       
-    </nav>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element = {<Layout categories={categories}/>}>
+      <Route path='basket' element ={<Basket/>}/>
+      <Route path='checkout' element ={<Checkout/>}/>
+      <Route path='products/:productId' element = {<ProductDetail/>}/>
+      <Route path='categories/:categoryId' element ={<Category/>}/>
+      </Route>
+    </Routes>
    
-    <main>
-      
-    {products.errorMessage && <div>Error : {products.errorMessage}</div>}
-      {
-       products.data && renderProducts()
-      }
-      
-      </main>
-  </section>
-   <footer>
-    footer
-   </footer>
+    </BrowserRouter>
  </>
  )
  
   
-}
+};
 
 export default App;

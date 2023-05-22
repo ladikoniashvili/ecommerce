@@ -68,8 +68,11 @@ const ProductDetail = () => {
 export default ProductDetail
 
 const ProductDescription = styled.div`
+margin-right: 80px;
+width: 700px;
+margin: 30px;
+    
 
-grid-column: 1 / span 3
 
 `
 ;

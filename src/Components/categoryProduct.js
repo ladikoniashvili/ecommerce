@@ -14,7 +14,7 @@ import styled from 'styled-components';
         </div>
         <figure>
             <div className='category-product-image-container'>
-                <img src={`./assets/${image}`} alt = {title} />
+                <img src={`/assets/${image}`} alt = {title} />
             </div>
         </figure>
 

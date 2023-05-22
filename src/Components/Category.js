@@ -4,7 +4,7 @@ import { getProducts} from "../fetcher";
 import CategoryProduct from "./categoryProduct";
 import { useState, useEffect } from "react";
 
-const Category = ({id,title, onCategoryClick}) => {
+const Category = () => {
     const[products,setProducts] = useState({errorMessage : '' , data : []});
     const {categoryId} = useParams();
     useEffect(() => {
@@ -15,10 +15,12 @@ const Category = ({id,title, onCategoryClick}) => {
         fetchData();
     }, [categoryId]);
     const renderProducts = () => {
-        return products.data.map(p =>
-         <CategoryProduct key={p.id}{...p}>{p.title}</CategoryProduct>
-        )
-     }
+      return products.data.map((p) => (
+          <CategoryProduct key={p.id} {...p}>
+              {p.title}
+          </CategoryProduct>
+      ));
+  };
     return (
       <div>
        {products.errorMessage && <div>Error : {products.errorMessage}</div>}

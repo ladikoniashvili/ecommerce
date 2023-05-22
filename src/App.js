@@ -16,7 +16,7 @@ import Category from './Components/Category';
 
 function App() {
   const [categories,setCategories] = useState({errorMessage : '' , data : []});
-  const[products,setProducts] = useState({errorMessage : '' , data : []});
+  
 
   useEffect(() => { 
    const fetchData = async () =>{
@@ -28,18 +28,33 @@ function App() {
 
  return (
   <>
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element = {<Layout categories={categories}/>}>
-      <Route path='basket' element ={<Basket/>}/>
-      <Route path='checkout' element ={<Checkout/>}/>
-      <Route path='products/:productId' element = {<ProductDetail/>}/>
-      <Route path='categories/:categoryId' element ={<Category/>}/>
-      </Route>
-    </Routes>
-   
-    </BrowserRouter>
- </>
+            <BrowserRouter>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <Layout
+                                categories={categories}
+                            />
+                        }
+                    >
+                        
+                        <Route path="basket" element={<Basket />} />
+                        <Route path="checkout" element={<Checkout />} />
+                        
+                        
+                        <Route
+                            path="categories/:categoryId"
+                            element={<Category />}
+                        />
+                        <Route
+                            path="products/:productId"
+                            element={<ProductDetail />}
+                        />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </>
  )
  
   

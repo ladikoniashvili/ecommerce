@@ -1,43 +1,50 @@
-import React from 'react'
-import { Link , Outlet } from 'react-router-dom'
+import React from "react";
 
-const Layout = ({categories}) => {
+import { Outlet, Link } from "react-router-dom";
 
+import { HomeIcon, CartIcon } from "./icons";
+import Search from "./search";
 
-     const renderCategories = () => {
+const Layout = ({ categories }) => {
+    const renderCategories = () => {
         return categories.data.map((c) => (
             <li key={c.id}>
                 <Link to={`/categories/${c.id}`}>{c.title}</Link>
             </li>
-           ));
-     };
+        ));
+    };
 
-  return (
-    <>
-    <header>
-      <h1>My Store</h1>
-    </header>
-  
-    <section>
-      <nav>
-        {categories.errorMessage && <div>Error : {categories.errorMessage}</div>}
-        <ul>
-        {
-          categories.data && renderCategories() 
-        }
-        </ul>
-         
-      </nav>
-     
-      <main>
-        <Outlet/>
-        </main>
-    </section>
-     <footer>
-      footer
-     </footer>
-   </>
-  )
-}
+    return (
+        <>
+            <header>
+                <div id="headerHomeIcon">
+                    <Link to="/"><HomeIcon width={40} /></Link>
+                </div>
+                <Search />
 
-export default Layout
+                <div id="headerTitle">Our Store</div>
+                <div id="headerCartIcon">
+                    <Link to="/basket"><CartIcon width={40} /></Link>
+                </div>
+            </header>
+            <section>
+                <nav>
+                    {categories.errorMessage && (
+                        <div>Error: {categories.errorMessage}</div>
+                    )}
+
+                    <ul>{categories.data && renderCategories()}</ul>
+                </nav>
+                <main>
+                    <Outlet />
+                </main>
+            </section>
+
+            <footer>
+                <Link to="/">Home</Link> | <Link to="/basket">Basket</Link>
+            </footer>
+        </>
+    );
+};
+
+export default Layout;

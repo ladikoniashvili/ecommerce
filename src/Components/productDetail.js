@@ -1,54 +1,67 @@
 import React, { useContext } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
-import styled from 'styled-components';
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
 
 import { CartContext } from "../contexts/cartContext";
 
+import { getProductById } from "../fetcher";
 
+const ProductDetail = () => {
+    const { addProduct } = useContext(CartContext);;
+    const [product, setProduct] = React.useState({
+        errorMessage: "",
+        data: {},
+    });
+    const { productId } = useParams();
 
-const CategoryProduct = ({
-    id,
-    title,
-    image,
-    specs,
-    features,
-    price,
-    stock,
-}) => {
-    const navigate = useNavigate();
-    const { addProduct } = useContext(CartContext);
+    React.useEffect(() => {
+        const fetchData = async () => {
+            const responseObject = await getProductById(productId);
+            setProduct(responseObject);
+        };
+        fetchData();
+    }, [productId]);
+
+    const createMarkup = () => {
+        return { __html: product.data?.description };
+    };
 
     return (
         <ProductInfoArticle>
-            <ProductTitle>
-                <Link to={`/products/${id}`}>{title}</Link>
-            </ProductTitle>
+            <ProductTitle>{product.data.title}</ProductTitle>
 
             <figure>
                 <ProductImageContainer>
-                    <ProductImage src={`/assets/${image}`} alt={title} />
+                    <ProductImage
+                        src={`/assets/${product.data.image}`}
+                        alt={product.data.title}
+                    />
                 </ProductImageContainer>
             </figure>
 
             <aside>
                 <ProductInfo>
                     <ProductInfoHeader>Dimensions</ProductInfoHeader>
-                    <label>{specs.dimensions}</label>
+                    <label>{product.data.specs?.dimensions}</label>
                 </ProductInfo>
 
-                {specs.capacity && (
+                {product.data.specs?.capacity && (
                     <ProductInfo>
                         <ProductInfoHeader>Capacity</ProductInfoHeader>
-                        <label>{specs.capacity}</label>
+                        <label>{product.data.specs?.capacity}</label>
                     </ProductInfo>
                 )}
 
                 <ProductInfo>
                     <ProductInfoHeader>Features</ProductInfoHeader>
                     <ul>
-                        {features?.map((f, i) => {
-                            return <ProductInfoListItem key={`feature${i}`}>{f}</ProductInfoListItem>;
+                        {product.data.features?.map((f, i) => {
+                            return (
+                                <ProductInfoListItem key={`feature${i}`}>
+                                    {f}
+                                </ProductInfoListItem>
+                            );
                         })}
                     </ul>
                 </ProductInfo>
@@ -56,26 +69,39 @@ const CategoryProduct = ({
 
             <aside>
                 <ProductInfoFinancePrice>
-                    &pound;{price}
+                    &pound;{product.data.price}
                 </ProductInfoFinancePrice>
 
                 <ProductInfoStock>
-                    <ProductInfoStockLabel>Stock Level: {stock}</ProductInfoStockLabel>
+                    <ProductInfoStockLabel>
+                        Stock Level: {product.data.stock}
+                    </ProductInfoStockLabel>
                     <ProductInfoStockLabel>FREE Delivery</ProductInfoStockLabel>
                 </ProductInfoStock>
 
                 <ProductInfoAction>
-                    <ProductInfoActionButton onClick={() => navigate(`/products/${id}`)}>
-                        View Product
+                    <ProductInfoActionButton
+                        onClick={() =>
+                            addProduct({
+                                id: product.data.id,
+                                title: product.data.title,
+                                price: product.data.price,
+                            })
+                        }
+                    >
+                        Add to Basket
                     </ProductInfoActionButton>
-                    <ProductInfoActionButton onClick={() => addProduct({id, title, price})}>Add to Basket</ProductInfoActionButton>
                 </ProductInfoAction>
             </aside>
+
+            <ProductInfoDescription
+                dangerouslySetInnerHTML={createMarkup()}
+            ></ProductInfoDescription>
         </ProductInfoArticle>
     );
 };
 
-export default CategoryProduct;
+export default ProductDetail;
 
 const ProductInfoArticle = styled.article`
     display: grid;
@@ -84,13 +110,17 @@ const ProductInfoArticle = styled.article`
     column-gap: 20px;
 `;
 
+const ProductInfoDescription = styled.div`
+    grid-column: 1 / span 3;
+`;
+
 const ProductTitle = styled.div`
-        grid-column: 1 / span 3;
-        color: darkslategray;
-        font-weight: bold;
-        font-size: 1.5em;
-        padding-left: 10px;
-    `;
+    grid-column: 1 / span 3;
+    color: darkslategray;
+    font-weight: bold;
+    font-size: 1.5em;
+    padding-left: 10px;
+`;
 
 const ProductImageContainer = styled.div`
     padding: 10px;

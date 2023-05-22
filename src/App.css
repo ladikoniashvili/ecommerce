@@ -9,12 +9,9 @@ body {
 }
 
 a {
-    color: rgb(106, 35, 213);
+    color: darkslategray;
     text-decoration: none;
-    padding: 5px 10px;
-    
 }
-
 
 /* Style the header */
 header {
@@ -26,60 +23,6 @@ header {
     display: grid;
     grid-template-columns: 0.1fr 0.1fr 1fr 0.1fr;
 }
-header h1 {
-   font-size: 18px;
-   
-   
-} 
-.category-product-title {
-    width: 700px;
-    height: 10px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    position: absolute;
-
-}
-.category-product-title-wided{
-    width: 1000px;
-    height: 50px;
-    font-size: 28px;
-    color:  rgb(49, 30, 168);
-    position: absolute;
-    margin: 15px;
-
-}
-.wided {
-    margin-top: 50px;
-}
-.aside {
-    margin-top: 50px;
-    font-size: 20px;
-}
-
-.category-product-info-dimensions, .category-product-info-features h3, h3{
-    margin-bottom: 10px;
-    margin-top: 50px;
-}
-.category-product-finance{
-    padding: 10px;
-}
-.category-product-finance-price , .category-product-info-stock{
-    margin: 15px;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-}
-.category-product-info-stock label {
-    border: 1px solid #825d5d;
-    margin: 10px;
-    text-align: center;
-    border-radius: 10px;
-}
-button{
-    margin: 10px;
-    width: 120px;
-    height: 30px;
-}
 
 header a {
     color: white;
@@ -87,25 +30,14 @@ header a {
 
 #search {
     display: flex;
-   
 }
-.category-product-image-container img{
-    margin-right: 40px;
-    width: 400px;
-    margin: 30px;
-}
+
 #search input {
     margin-left: 10px;
     height: 30px;
     margin-top: 5px;
 }
-article {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    grid-template-rows: 0.25fr 1fr 0.25fr;
-    column-gap: 20px;
-    
-}
+
 #headerHomeIcon {
     justify-self: start;
 }
@@ -122,7 +54,6 @@ article {
 section {
     display: -webkit-flex;
     display: flex;
-    
 }
 
 /* Style the navigation menu */
@@ -150,12 +81,10 @@ nav ul li:hover {
 }
 
 main {
-   display: flex;
-   padding-top: 20px;
-   flex-direction: column;
-   
+    flex: 0.9;
+    padding-top: 20px;
+    min-height: 1600px;
 }
-
 
 /* Style the footer */
 footer {

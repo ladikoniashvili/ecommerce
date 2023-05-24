@@ -22,7 +22,7 @@ const Layout = ({ categories }) => {
                 </div>
                 <Search />
 
-                <div id="headerTitle">Our Store</div>
+                <div id="headerTitle">My Store</div>
                 <div id="headerCartIcon">
                     <Link to="/basket"><CartIcon width={40} /></Link>
                 </div>

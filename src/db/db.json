@@ -1,7 +1,6 @@
 {
   "categories": [
     { "id": 1, "title": "Fridges" },
-    { "id": 2, "title": "Kettles" },
     { "id": 3, "title": "Televisions" }
   ],
   "products": [
